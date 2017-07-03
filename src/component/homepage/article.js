@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, Image } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 
 class Article extends Component {
 
@@ -16,10 +16,16 @@ class Article extends Component {
           data={this.props.articles}
           keyExtractor={(item) => item.id}
           renderItem={({item}) =>
-            <View style={styles.item}>
+            <TouchableOpacity style={styles.item} onPress={() =>
+              this.props.navigator.push({
+                screen: "article.detail",
+                title: "Pushed Screen",
+                passProps:
+                  { id: item.id }
+              }) }>
               <Image source={{uri: item.image_url}} style={styles.image} />
               <Text style={styles.title} numberOfLines={2} renderTruncatedFooter={() => <ReadMoreButton />}>{item.title}</Text>
-            </View>
+            </TouchableOpacity>
           }/>
       </View>
     )

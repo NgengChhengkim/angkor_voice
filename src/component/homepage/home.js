@@ -41,7 +41,7 @@ class Home extends Component {
             </View>
           }
           renderItem={
-            ({item}) => <Article articles={item.articles} />
+            ({item}) => <Article navigator={this.props.navigator} articles={item.articles} />
           }
         />
       )
