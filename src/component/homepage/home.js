@@ -1,11 +1,22 @@
 import React, { Component } from "react";
-import { View, Text, SectionList, Image, ActivityIndicator } from 'react-native';
-import Article from "./article"
+import { View, Text, SectionList, Image, ActivityIndicator, TouchableHighlight } from 'react-native';
+import Article from "./article";
+import FBSDK from 'react-native-fbsdk';
+
+const {
+  ShareDialog,
+} = FBSDK;
+
+const shareLinkContent = {
+  contentType: 'link',
+  contentUrl: "http://www.angkorvoice.com/articles/1088",
+  contentDescription: 'Wow, check out this great site!',
+};
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {categories: [], loading: true};
+    this.state = {categories: [], loading: true, shareLinkContent: shareLinkContent};
   }
 
   componentDidMount() {
@@ -19,33 +30,50 @@ class Home extends Component {
     });
   }
 
-  render () {
-    if (this.state.loading) {
-      return (
-        <View style={styles.activityIndicator}>
-          <ActivityIndicator
-             animating = {this.state.loading}
-             color = '#bc2b78'
-             size = "large"
-          />
-        </View>
-      )
-    } else {
-      return (
-        <SectionList
-          sections={this.state.categories}
-          renderSectionHeader={({section}) =>
-            <View style={styles.categoryHeader}>
-              <Text style={styles.categoryName}>{section.data[0].name}</Text>
-              <Text style={styles.seeMore}>ជាច្រើនទៀត</Text>
-            </View>
-          }
-          renderItem={
-            ({item}) => <Article navigator={this.props.navigator} articles={item.articles} />
-          }
-        />
-      )
+  shareLinkWithShareDialog() {
+  var tmp = this;
+  ShareDialog.canShow(this.state.shareLinkContent).then(
+    function(canShow) {
+      if (canShow) {
+        return ShareDialog.show(tmp.state.shareLinkContent);
+      }
     }
+  ).then(
+    function(result) {
+      if (result.isCancelled) {
+        alert('Share cancelled');
+      } else {
+        alert('Share success with postId: '
+          + result.postId);
+      }
+    },
+    function(error) {
+      alert('Share fail with error: ' + error);
+    }
+  );
+}
+
+  render () {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Twitter and Facebook share
+        </Text>
+
+        <Text style={styles.instructions}>
+          Try tapping one of the buttons
+        </Text>
+
+        <View style={styles.seperator}/>
+
+        <TouchableHighlight onPress={() => this.shareLinkWithShareDialog()}>
+          <View style={{alignItems: 'center',justifyContent:'center', width: 150, height: 50,backgroundColor:'#00aced'}}>
+           <Text style={{color:'#ffffff',fontWeight:'800',}}>Share on Twitter</Text>
+          </View>
+        </TouchableHighlight>
+      </View>
+
+    )
   }
 }
 
@@ -74,7 +102,23 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column"
+  },
+
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  seperator:{
+    marginBottom: 20
   }
 };
+
 
 export default Home;
