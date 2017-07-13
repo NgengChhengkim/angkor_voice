@@ -1,7 +1,9 @@
 import { Navigation } from 'react-native-navigation';
 
-import Article from './homepage/home';
+import HomeArticle from './homepage/home';
+import ArticleDetail from "./article/Detail";
 
 export default function registerScreens() {
-  Navigation.registerComponent('homepage.home', () => Article);
+  Navigation.registerComponent("homepage.home", () => HomeArticle);
+  Navigation.registerComponent("article.detail", () => ArticleDetail);
 }

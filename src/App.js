@@ -9,7 +9,6 @@ import {
   ScrollView
 } from 'react-native';
 
-import Article from "./component/homepage/article";
 import { Navigation } from 'react-native-navigation';
 import registerScreens from "./component/registerScreens";
 
