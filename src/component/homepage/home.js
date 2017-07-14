@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { View, Text, SectionList, Image, ActivityIndicator } from 'react-native';
-import Article from "./article"
+import Article from "./article";
+import navigatorStyle from "./../shared/navigatorStyle";
+import Loading from "./../shared/loading";
 
 class Home extends Component {
+  static navigatorStyle = navigatorStyle;
+
   constructor(props) {
     super(props);
     this.state = {categories: [], loading: true};
@@ -22,13 +26,7 @@ class Home extends Component {
   render () {
     if (this.state.loading) {
       return (
-        <View style={styles.activityIndicator}>
-          <ActivityIndicator
-             animating = {this.state.loading}
-             color = '#bc2b78'
-             size = "large"
-          />
-        </View>
+        <Loading />
       )
     } else {
       return (
@@ -57,23 +55,16 @@ const styles = {
   },
 
   categoryName: {
-    color: "#025268",
     fontSize: 18,
+    color: "#000",
     flex: 1
   },
 
   seeMore: {
-    color: "#025268",
+    color: "#365899",
     fontSize: 18,
     textAlign: "right",
     flex: 1
-  },
-
-  activityIndicator: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column"
   }
 };
 

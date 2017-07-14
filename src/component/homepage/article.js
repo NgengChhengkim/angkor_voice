@@ -19,7 +19,7 @@ class Article extends Component {
             <TouchableOpacity style={styles.item} onPress={() =>
               this.props.navigator.push({
                 screen: "article.detail",
-                title: "Pushed Screen",
+                title: "ANGKORVOICE",
                 passProps:
                   { id: item.id }
               }) }>
