@@ -17,11 +17,6 @@ registerScreens();
 Navigation.startSingleScreenApp({
   screen: {
     screen: 'homepage.home',
-    title: 'AngkorVoice',
-    navigatorStyle: {
-      navBarBackgroundColor: "blue",
-      navBarTextColor: "white",
-      navBarTitleTextCentered: true
-    }
+    title: 'ANGKORVOICE'
   }
 });

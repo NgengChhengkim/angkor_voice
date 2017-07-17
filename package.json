@@ -10,6 +10,7 @@
     "react": "16.0.0-alpha.12",
     "react-addons-shallow-compare": "^15.6.0",
     "react-native": "0.45.1",
+    "react-native-fbsdk": "^0.6.1",
     "react-native-fence-html": "^1.0.6",
     "react-native-navigation": "^1.1.108"
   },
