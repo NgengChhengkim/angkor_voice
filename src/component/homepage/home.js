@@ -7,13 +7,23 @@ import Loading from "./../shared/loading";
 class Home extends Component {
   static navigatorStyle = navigatorStyle;
 
+  static navigatorButtons = {
+    leftButtons: [
+      {
+        icon: require('./../../images/navicon_menu.png'),
+        id: "toogleDrawer"
+      }
+    ]
+  };
+
   constructor(props) {
     super(props);
     this.state = {categories: [], loading: true};
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
   componentDidMount() {
-    fetch("http://www.angkorvoice.com/api/v1/top_page/categories")
+    fetch("https://www.angkorvoice.com/api/v1/top_page/categories")
     .then((response) => response.json())
     .then((responseJson) => {
       this.setState({categories: responseJson.categories, loading: false});
@@ -21,6 +31,15 @@ class Home extends Component {
     .catch((error) => {
       console.error(error);
     });
+  }
+
+  onNavigatorEvent(event) {
+    if (event.id === "toogleDrawer") {
+      this.props.navigator.toggleDrawer({
+        side: "left",
+        animated: true
+      });
+    }
   }
 
   render () {

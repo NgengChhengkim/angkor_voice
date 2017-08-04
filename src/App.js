@@ -16,7 +16,14 @@ registerScreens();
 
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'homepage.home',
-    title: 'ANGKORVOICE'
+    screen: "category.detail",
+    title: "ANGKORVOICE",
+  },
+  passProps: { url: "https://angkorvoice.com/api/v1/top_page/articles" },
+
+  drawer: {
+    left: {
+      screen: "side_menu"
+    }
   }
 });

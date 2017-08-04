@@ -23,13 +23,13 @@ export default class Detail extends Component {
   }
 
   componentDidMount() {
-    fetch("http://www.angkorvoice.com/api/v1/articles/" + this.props.id)
+    fetch("https://www.angkorvoice.com/api/v1/articles/" + this.props.id)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({article: responseJson.data, loading: false});
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       }
     );
   }
@@ -38,7 +38,7 @@ export default class Detail extends Component {
   shareLinkWithShareDialog() {
     const shareLinkContent = {
       contentType: 'link',
-      contentUrl: "http://www.angkorvoice.com/articles/" + this.props.id
+      contentUrl: "https://www.angkorvoice.com/articles/" + this.props.id
     }
 
     var tmp = this;
@@ -69,7 +69,7 @@ export default class Detail extends Component {
         return (
           <View style={styles.imageContainer}>
             <Image style={styles.image}
-              source={{uri: "http://www.angkorvoice.com" + htmlAttribs.src}} />
+              source={{uri: "https://www.angkorvoice.com" + htmlAttribs.src}} />
           </View>
         )
       }
