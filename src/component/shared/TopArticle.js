@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 
 export default class TopArticle extends Component {
   constructor(props) {
@@ -8,16 +8,25 @@ export default class TopArticle extends Component {
 
   render () {
     return (
-      <View style={styles.topArticle}>
-        <Image
-          style={styles.image}
-          source={{uri: this.props.article.image_url}}>
-          <View style={styles.content}>
-            <Text style={styles.title}>{this.props.article.title}</Text>
-            <Text style={styles.publishDate}>{this.props.article.published_at}</Text>
-          </View>
-        </Image>
-      </View>
+      <TouchableOpacity style={styles.article} onPress={() =>
+        this.props.navigator.push({
+          screen: "article.detail",
+          title: "ANGKORVOICE",
+          passProps:
+            { id: this.props.article.id }
+        }) }>
+
+        <View style={styles.topArticle}>
+          <Image
+            style={styles.image}
+            source={{uri: this.props.article.image_url}}>
+            <View style={styles.content}>
+              <Text style={styles.title}>{this.props.article.title}</Text>
+              <Text style={styles.publishDate}>{this.props.article.published_at}</Text>
+            </View>
+          </Image>
+        </View>
+      </TouchableOpacity>
     )
   }
 }

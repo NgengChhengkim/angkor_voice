@@ -17,7 +17,7 @@ registerScreens();
 Navigation.startSingleScreenApp({
   screen: {
     screen: "category.detail",
-    title: "ANGKORVOICE",
+    title: "អត្ថបទថ្មីៗ",
   },
   passProps: { url: "https://angkorvoice.com/api/v1/top_page/articles" },
 

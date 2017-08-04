@@ -55,11 +55,12 @@ export default class Detail extends Component {
     } else {
       return (
         <FlatList
+          showsVerticalScrollIndicator={false}
           style={styles.container}
           data={this.state.articles}
           keyExtractor={(item) => item.id}
           ListHeaderComponent={() =>
-            <TopArticle article={this.state.top_article}/>
+            <TopArticle article={this.state.top_article} navigator={this.props.navigator} />
           }
           renderItem={({item}) =>
             <TouchableOpacity style={styles.article} onPress={() =>
