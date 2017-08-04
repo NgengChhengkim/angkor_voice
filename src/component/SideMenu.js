@@ -15,54 +15,54 @@ export default class SideMenu extends Component {
     this.state = {
       data: [
         {
-          id: "home", name: "ទំព័រដើម",
-          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/top_page/articles"),
+          id: "home", name: "អត្ថបទថ្មីៗ",
+          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/top_page/articles", "អត្ថបទថ្មីៗ"),
           icon: "favoriteIcon"
         },
         {
-          id: "top", name: "Top 30",
-          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/popular/articles"),
+          id: "top", name: "អត្ថបទពេញនិយម",
+          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/popular/articles", "អត្ថបទពេញនិយម"),
           icon: "favoriteIcon"
         },
         {
           id: 1, name: "សហគ្រិនភាព",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/1/articles"),
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/1/articles", "សហគ្រិនភាព"),
           icon: "favoriteIcon"
         },
         {
           id: 2, name: "ចំណេះដឹងទូទៅ",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/2/articles"),
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/2/articles", "ចំណេះដឹងទូទៅ"),
           icon: "favoriteIcon"
         },
         {
           id: 6, name: "និទានអប់រំ",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/6/articles"),
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/6/articles", "និទានអប់រំ"),
           icon: "favoriteIcon"
         },
         {
           id: 3, name: "សុខភាព",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/3/articles"),
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/3/articles", "សុខភាព"),
           icon: "favoriteIcon"
         },
         {
           id: 4, name: "ជីវិត​ និង ស្នេហា",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/4/articles"),
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/4/articles", "ជីវិត​ និង ស្នេហា"),
           icon: "favoriteIcon"
         },
         {
           id: 5, name: "ប្លែកៗ",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/5/articles"),
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/5/articles", "ប្លែកៗ"),
           icon: "favoriteIcon",
         }
       ]
     }
   }
 
-  sideMenuHandle(url) {
+  sideMenuHandle(url, title) {
     this._toggleDrawer();
     this.props.navigator.resetTo({
       screen: "category.detail",
-      title: "ANGKORVOICE",
+      title: title,
       passProps: { url: url }
     });
   }

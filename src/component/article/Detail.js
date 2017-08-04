@@ -12,6 +12,14 @@ const {
 
 export default class Detail extends Component {
   static navigatorStyle = navigatorStyle;
+  static navigatorButtons = {
+    rightButtons: [
+      {
+        icon: require("./../../images/share/share.png"),
+        id: "share_facebook"
+      }
+    ]
+  };
 
   constructor(props) {
     super(props);
@@ -20,6 +28,8 @@ export default class Detail extends Component {
       article: {content: ""},
       loading: true
     };
+
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
   componentDidMount() {
@@ -34,6 +44,11 @@ export default class Detail extends Component {
     );
   }
 
+  onNavigatorEvent(event) {
+    if (event.id === "share_facebook") {
+      this.shareLinkWithShareDialog();
+    }
+  }
 
   shareLinkWithShareDialog() {
     const shareLinkContent = {
@@ -81,22 +96,14 @@ export default class Detail extends Component {
       )
     } else {
       return (
-        <ScrollView style={styles.articleDetail}>
+        <ScrollView style={styles.articleDetail} showsVerticalScrollIndicator={false}>
           <View style={styles.imageContainer}>
             <Image style={styles.image} source={{uri: this.state.article.image_url}} />
           </View>
 
           <View style={styles.bodyContainer}>
             <Text style={styles.title}>{this.state.article.title}</Text>
-            <View style={styles.publishedAtShare}>
-              <TouchableOpacity onPress={() => this.shareLinkWithShareDialog()}>
-                <Image
-                  style={styles.fbShare}
-                  source={require("./../../images/fb-share-button.png")}
-                />
-              </TouchableOpacity>
-              <Text style={styles.publishedAt}>{this.state.article.published_at}</Text>
-            </View>
+            <Text style={styles.publishedAt}>{this.state.article.published_at}</Text>
             <HTML html={this.state.article.content.replace(/<p>/g, "  ").replace(/<\/p>/g, "<br>")}
               htmlStyles={styles} renderers={renderers} />
           </View>
@@ -119,7 +126,7 @@ const styles = {
   },
 
   publishedAt: {
-    fontSize: 12,
+    fontSize: 11,
     fontStyle: "italic",
     color: "#7E7E7E"
   },
@@ -133,18 +140,5 @@ const styles = {
     flex: 1,
     height: 200,
     flexDirection: "row"
-  },
-
-  publishedAtShare: {
-    flexDirection: "row",
-    marginBottom: 5,
-    marginTop: 3
-  },
-
-  fbShare: {
-    height: 20,
-    width: 80,
-    marginRight: 3,
-    borderRadius: 2
   }
 }
