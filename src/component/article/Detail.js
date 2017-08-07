@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { View, Text, Image, ScrollView, Dimensions, PixelRatio, TouchableOpacity } from "react-native";
+import { View, Text, Image, ScrollView, Dimensions, PixelRatio, TouchableOpacity, FlatList } from "react-native";
 import HTML from "react-native-fence-html";
 import navigatorStyle from "./../shared/navigatorStyle";
 import Loading from "./../shared/loading";
+import ListArticle from "./../shared/ListArticle";
 
 import FBSDK from 'react-native-fbsdk';
 
@@ -36,7 +37,7 @@ export default class Detail extends Component {
     fetch("https://www.angkorvoice.com/api/v1/articles/" + this.props.id)
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({article: responseJson.data, loading: false});
+        this.setState({article: responseJson.data, articles: responseJson.related_articles,loading: false});
       })
       .catch((error) => {
         console.log(error);
@@ -96,18 +97,33 @@ export default class Detail extends Component {
       )
     } else {
       return (
-        <ScrollView style={styles.articleDetail} showsVerticalScrollIndicator={false}>
-          <View style={styles.imageContainer}>
-            <Image style={styles.image} source={{uri: this.state.article.image_url}} />
-          </View>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          style={styles.articleDetail}
+          data={this.state.articles}
+          keyExtractor={(item) => item.id}
+          ListHeaderComponent={() =>
+            <View>
+              <View style={styles.imageContainer}>
+                <Image style={styles.image} source={{uri: this.state.article.image_url}} />
+              </View>
 
-          <View style={styles.bodyContainer}>
-            <Text style={styles.title}>{this.state.article.title}</Text>
-            <Text style={styles.publishedAt}>{this.state.article.published_at}</Text>
-            <HTML html={this.state.article.content.replace(/<p>/g, "  ").replace(/<\/p>/g, "<br>")}
-              htmlStyles={styles} renderers={renderers} />
-          </View>
-        </ScrollView>
+              <View style={styles.bodyContainer}>
+                <Text style={styles.title}>{this.state.article.title}</Text>
+                <Text style={styles.publishedAt}>{this.state.article.published_at}</Text>
+                <HTML html={this.state.article.content.replace(/<p>/g, "  ").replace(/<\/p>/g, "<br>")}
+                  htmlStyles={styles} renderers={renderers} />
+              </View>
+
+              <View style={styles.relatedArticle}>
+                <Text style={styles.relatedText}>អត្ថបទផ្សេងទៀត</Text>
+              </View>
+            </View>
+          }
+          renderItem={({item}) =>
+            <ListArticle navigator={this.props.navigator} article={item} />
+          }
+        />
       )
     }
   }
@@ -117,7 +133,8 @@ const windowWidth = Dimensions.get('window').width * PixelRatio.get()
 
 const styles = {
   bodyContainer: {
-    padding: 5
+    padding: 5,
+    backgroundColor: "white"
   },
 
   title: {
@@ -140,5 +157,25 @@ const styles = {
     flex: 1,
     height: 200,
     flexDirection: "row"
+  },
+
+  relatedArticle: {
+    backgroundColor: "white",
+    borderBottomWidth: 3,
+    borderBottomColor: "#13548a"
+  },
+
+  relatedText: {
+    fontWeight: "bold",
+    backgroundColor: "#13548a",
+    color: "white",
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 2,
+    paddingBottom: 2,
+    alignSelf: "flex-start",
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    marginLeft: 5
   }
 }
