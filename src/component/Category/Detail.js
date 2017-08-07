@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, Image, FlatList, TouchableOpacity} from "react-native";
+import { View, Text, Image, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
 import navigatorStyle from "./../shared/navigatorStyle";
 import Loading from "./../shared/loading";
 import TopArticle from "./../shared/TopArticle";
 import ListArticle from "./../shared/ListArticle";
+
+let page = 1;
 
 export default class Detail extends Component {
   static navigatorStyle = navigatorStyle;
@@ -21,22 +23,14 @@ export default class Detail extends Component {
 
     this.state = {
       articles: [],
-      loading: true
+      loading: true,
+      isFetching: false
     };
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
   componentDidMount() {
-    fetch(this.props.url)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          top_article: responseJson.top_article ,articles: responseJson.articles, loading: false
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+    this.fetchData()
   }
 
   onNavigatorEvent(event) {
@@ -47,6 +41,60 @@ export default class Detail extends Component {
       });
     }
   }
+
+  fetchData () {
+    fetch(this.props.url)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          top_article: responseJson.top_article,
+          articles: responseJson.articles,
+          loading: false,
+          isFetching: false
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  onLoadingMoreData () {
+    fetch(this.props.url + "?page=" + page)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          articles: [...this.state.articles, ...responseJson.articles],
+          loadingMore: false
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  onRefresh() {
+    this.setState({ isFetching: true })
+    this.fetchData();
+  }
+
+  onLoadMoreData() {
+    if (this.props.canLoadMore) {
+      page = page + 1;
+      this.setState({loadingMore: true})
+      this.onLoadingMoreData();
+    }
+  }
+
+  renderFooter() {
+    if (!this.state.loadingMore) return null;
+
+    return (
+      <ActivityIndicator
+        animating = {true}
+        size = "large"
+      />
+    );
+  };
 
   render () {
     if (this.state.loading) {
@@ -66,6 +114,10 @@ export default class Detail extends Component {
           renderItem={({item}) =>
             <ListArticle navigator={this.props.navigator} article={item} />
           }
+          ListFooterComponent={() => this.renderFooter()}
+          onRefresh={() => this.onRefresh()}
+          refreshing={this.state.isFetching}
+          onEndReached={() => this.onLoadMoreData()}
         />
       )
     }
