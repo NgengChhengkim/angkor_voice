@@ -3,6 +3,7 @@ import { View, Text, Image, FlatList, TouchableOpacity} from "react-native";
 import navigatorStyle from "./../shared/navigatorStyle";
 import Loading from "./../shared/loading";
 import TopArticle from "./../shared/TopArticle";
+import ListArticle from "./../shared/ListArticle";
 
 export default class Detail extends Component {
   static navigatorStyle = navigatorStyle;
@@ -63,20 +64,9 @@ export default class Detail extends Component {
             <TopArticle article={this.state.top_article} navigator={this.props.navigator} />
           }
           renderItem={({item}) =>
-            <TouchableOpacity style={styles.article} onPress={() =>
-              this.props.navigator.push({
-                screen: "article.detail",
-                title: "ANGKORVOICE",
-                passProps:
-                  { id: item.id }
-              }) }>
-              <Image source={{uri: item.image_url}} style={styles.articleImage} />
-              <View style={styles.articleTitle}>
-                <Text style={styles.title} numberOfLines={4} renderTruncatedFooter={() => <ReadMoreButton />}>{item.title}</Text>
-                <Text style={styles.publishDate}>{item.published_at}</Text>
-              </View>
-            </TouchableOpacity>
-          } />
+            <ListArticle navigator={this.props.navigator} article={item} />
+          }
+        />
       )
     }
   }
@@ -85,35 +75,5 @@ export default class Detail extends Component {
 const styles= {
   container: {
     backgroundColor: "#f7f7f7"
-  },
-
-  article: {
-    flex: 1,
-    flexDirection: "row",
-    marginLeft: 6,
-    marginRight: 6,
-    marginTop: 6,
-    backgroundColor: "white",
-
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#ececec',
-  },
-
-  articleImage: {
-    flex: 0.4,
-    height: 100
-  },
-
-  articleTitle: {
-    padding: 8,
-    flex: 0.6
-  },
-
-  publishDate: {
-    color: "#a7a7a7",
-    fontSize: 11,
-    fontStyle: "italic",
-    marginTop: 5
   }
 }

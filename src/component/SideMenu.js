@@ -16,43 +16,35 @@ export default class SideMenu extends Component {
       data: [
         {
           id: "home", name: "អត្ថបទថ្មីៗ",
-          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/top_page/articles", "អត្ថបទថ្មីៗ"),
-          icon: "favoriteIcon"
+          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/top_page/articles", "អត្ថបទថ្មីៗ")
         },
         {
           id: "top", name: "អត្ថបទពេញនិយម",
-          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/popular/articles", "អត្ថបទពេញនិយម"),
-          icon: "favoriteIcon"
+          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/popular/articles", "អត្ថបទពេញនិយម")
         },
         {
           id: 1, name: "សហគ្រិនភាព",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/1/articles", "សហគ្រិនភាព"),
-          icon: "favoriteIcon"
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/1/articles", "សហគ្រិនភាព")
         },
         {
           id: 2, name: "ចំណេះដឹងទូទៅ",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/2/articles", "ចំណេះដឹងទូទៅ"),
-          icon: "favoriteIcon"
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/2/articles", "ចំណេះដឹងទូទៅ")
         },
         {
           id: 6, name: "និទានអប់រំ",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/6/articles", "និទានអប់រំ"),
-          icon: "favoriteIcon"
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/6/articles", "និទានអប់រំ")
         },
         {
           id: 3, name: "សុខភាព",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/3/articles", "សុខភាព"),
-          icon: "favoriteIcon"
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/3/articles", "សុខភាព")
         },
         {
           id: 4, name: "ជីវិត​ និង ស្នេហា",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/4/articles", "ជីវិត​ និង ស្នេហា"),
-          icon: "favoriteIcon"
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/4/articles", "ជីវិត​ និង ស្នេហា")
         },
         {
           id: 5, name: "ប្លែកៗ",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/5/articles", "ប្លែកៗ"),
-          icon: "favoriteIcon",
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/5/articles", "ប្លែកៗ")
         }
       ]
     }
@@ -81,7 +73,6 @@ export default class SideMenu extends Component {
         onPress={item.action}
         underlayColor={"#44a9fc"} >
         <View style={styles.rowContainer}>
-          <Image source={icons[item.icon]} />
           <Text style={styles.textStyle}>{item.name}</Text>
         </View>
       </TouchableHighlight>
@@ -105,14 +96,6 @@ export default class SideMenu extends Component {
     </View>
     );
   }
-}
-
-const icons = {
-  homeIcon: require("./../images/home/home.png"),
-  favoriteIcon: require("./../images/navicon_menu.png"),
-  historyIcon: require("./../images/navicon_menu.png"),
-  aboutIcon: require("./../images/navicon_menu.png"),
-  rateIcon: require("./../images/navicon_menu.png")
 }
 
 const styles = {
