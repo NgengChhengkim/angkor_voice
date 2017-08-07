@@ -16,27 +16,28 @@ export default class SideMenu extends Component {
       data: [
         {
           id: "home", name: "អត្ថបទថ្មីៗ",
-          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/top_page/articles", "អត្ថបទថ្មីៗ")
+          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/top_page/articles", "អត្ថបទថ្មីៗ"),
+
         },
         {
           id: "top", name: "អត្ថបទពេញនិយម",
-          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/popular/articles", "អត្ថបទពេញនិយម")
+          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/popular/articles", "អត្ថបទពេញនិយម"),
         },
         {
           id: 1, name: "សហគ្រិនភាព",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/1/articles", "សហគ្រិនភាព")
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/1/articles", "សហគ្រិនភាព", true)
         },
         {
           id: 2, name: "ចំណេះដឹងទូទៅ",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/2/articles", "ចំណេះដឹងទូទៅ")
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/2/articles", "ចំណេះដឹងទូទៅ", true)
         },
         {
           id: 6, name: "និទានអប់រំ",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/6/articles", "និទានអប់រំ")
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/6/articles", "និទានអប់រំ", true)
         },
         {
           id: 3, name: "សុខភាព",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/3/articles", "សុខភាព")
+          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/3/articles", "សុខភាព", true)
         },
         {
           id: 4, name: "ជីវិត​ និង ស្នេហា",
@@ -50,12 +51,12 @@ export default class SideMenu extends Component {
     }
   }
 
-  sideMenuHandle(url, title) {
+  sideMenuHandle(url, title, canLoadMore) {
     this._toggleDrawer();
     this.props.navigator.resetTo({
       screen: "category.detail",
       title: title,
-      passProps: { url: url }
+      passProps: { url: url, canLoadMore: canLoadMore }
     });
   }
 

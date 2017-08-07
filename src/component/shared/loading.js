@@ -7,7 +7,6 @@ export default class Loading extends Component {
       <View style={styles.activityIndicator}>
         <ActivityIndicator
            animating = {true}
-           color = '#bc2b78'
            size = "large"
         />
       </View>
