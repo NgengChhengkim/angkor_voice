@@ -4,6 +4,8 @@ import HTML from "react-native-fence-html";
 import navigatorStyle from "./../shared/navigatorStyle";
 import Loading from "./../shared/loading";
 import ListArticle from "./../shared/ListArticle";
+import {TOKEN} from "react-native-dotenv";
+import Settings from "./../../Settings";
 
 import FBSDK from 'react-native-fbsdk';
 
@@ -34,7 +36,7 @@ export default class Detail extends Component {
   }
 
   componentDidMount() {
-    fetch("https://www.angkorvoice.com/api/v1/articles/" + this.props.id)
+    fetch(Settings.articleUrl + this.props.id + "?" + TOKEN)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({article: responseJson.data, articles: responseJson.related_articles,loading: false});
