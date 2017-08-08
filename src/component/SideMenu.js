@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import {TOKEN} from "react-native-dotenv";
+import Settings from "./../Settings";
 import {
   Text,
   View,
@@ -16,36 +18,36 @@ export default class SideMenu extends Component {
       data: [
         {
           id: "home", name: "អត្ថបទថ្មីៗ",
-          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/top_page/articles", "អត្ថបទថ្មីៗ"),
+          action: () => this.sideMenuHandle(Settings.topPageUrl + "?" + TOKEN, "អត្ថបទថ្មីៗ"),
 
         },
         {
           id: "top", name: "អត្ថបទពេញនិយម",
-          action: () => this.sideMenuHandle("https://angkorvoice.com/api/v1/popular/articles", "អត្ថបទពេញនិយម"),
+          action: () => this.sideMenuHandle(Settings.popularCategoryUrl + "?" + TOKEN, "អត្ថបទពេញនិយម"),
         },
         {
           id: 1, name: "សហគ្រិនភាព",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/1/articles", "សហគ្រិនភាព", true)
+          action: () => this.sideMenuHandle(Settings.entrepreneurCategoryUrl + "?" + TOKEN, "សហគ្រិនភាព", true)
         },
         {
           id: 2, name: "ចំណេះដឹងទូទៅ",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/2/articles", "ចំណេះដឹងទូទៅ", true)
+          action: () => this.sideMenuHandle(Settings.knowledgeCategoryUrl + "?" + TOKEN, "ចំណេះដឹងទូទៅ", true)
         },
         {
           id: 6, name: "និទានអប់រំ",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/6/articles", "និទានអប់រំ", true)
+          action: () => this.sideMenuHandle(Settings.legenCategoryUrl + "?" + TOKEN, "និទានអប់រំ", true)
         },
         {
           id: 3, name: "សុខភាព",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/3/articles", "សុខភាព", true)
+          action: () => this.sideMenuHandle(Settings.healthCategoryUrl + "?" + TOKEN, "សុខភាព", true)
         },
         {
           id: 4, name: "ជីវិត​ និង ស្នេហា",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/4/articles", "ជីវិត​ និង ស្នេហា")
+          action: () => this.sideMenuHandle(Settings.lifeAndLoveCategoryUrl + "?" + TOKEN, "ជីវិត​ និង ស្នេហា")
         },
         {
           id: 5, name: "ប្លែកៗ",
-          action: () => this.sideMenuHandle("https://www.angkorvoice.com/api/v1/categories/5/articles", "ប្លែកៗ")
+          action: () => this.sideMenuHandle(Settings.otherCategoryUrl + "?" + TOKEN, "ប្លែកៗ")
         }
       ]
     }

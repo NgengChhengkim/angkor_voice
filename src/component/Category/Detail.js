@@ -59,7 +59,7 @@ export default class Detail extends Component {
   }
 
   onLoadingMoreData () {
-    fetch(this.props.url + "?page=" + page)
+    fetch(this.props.url + "&page=" + page)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({

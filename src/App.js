@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {TOKEN} from "react-native-dotenv";
+import Settings from "./Settings";
 import {
   AppRegistry,
   StyleSheet,
@@ -19,7 +21,7 @@ Navigation.startSingleScreenApp({
     screen: "category.detail",
     title: "អត្ថបទថ្មីៗ",
   },
-  passProps: { url: "https://angkorvoice.com/api/v1/top_page/articles" },
+  passProps: {url: Settings.topPageUrl + "?" + TOKEN},
 
   drawer: {
     left: {
