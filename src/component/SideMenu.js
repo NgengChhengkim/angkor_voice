@@ -86,7 +86,10 @@ export default class SideMenu extends Component {
     return (
       <View style={styles.containerStyle}>
         <View style={styles.sideMenuHeader}>
-          <Text style={styles.sideMenuLogo}>A</Text>
+          <View style={styles.imageBorder}>
+
+          <Image source={require("./../images/logo.png")} style={styles.sideMenuLogo} />
+          </View>
           <Text style={styles.sideMenuText}>ANGKORVOICE</Text>
         </View>
         <FlatList
@@ -131,22 +134,22 @@ const styles = {
     justifyContent: "center"
   },
 
-  sideMenuLogo: {
-    height: 100,
-    width: 100,
-    borderWidth: 0.4,
+  imageBorder: {
+    borderWidth: 1,
     borderRadius: 10,
     borderColor: "#fff",
-    color: "#fff",
-    fontSize: 50,
-    fontWeight: "bold",
-    textAlign: "center"
+    padding: 10
+  },
+
+  sideMenuLogo: {
+    height: 70,
+    width: 70,
   },
 
   sideMenuText: {
     color: "#fff",
     fontSize: 25,
-    fontWeight: "bold"
+    marginTop: 5
   }
 }
 
