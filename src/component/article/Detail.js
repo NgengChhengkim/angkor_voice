@@ -69,14 +69,14 @@ export default class Detail extends Component {
     ).then(
       function(result) {
         if (result.isCancelled) {
-          alert('Share cancelled');
+          console.log('Share cancelled');
         } else {
-          alert('Share success with postId: '
+          console.log('Share success with postId: '
             + result.postId);
         }
       },
       function(error) {
-        alert('Share fail with error: ' + error);
+        console.log('Share fail with error: ' + error);
       }
     );
   }

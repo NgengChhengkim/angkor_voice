@@ -12,6 +12,7 @@ export default class TopArticle extends Component {
         this.props.navigator.push({
           screen: "article.detail",
           title: "ANGKORVOICE",
+          backButtonTitle: "",
           passProps:
             { id: this.props.article.id }
         }) }>
