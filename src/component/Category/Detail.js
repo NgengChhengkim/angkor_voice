@@ -24,13 +24,15 @@ export default class Detail extends Component {
     this.state = {
       articles: [],
       loading: true,
-      isFetching: false
+      isFetching: false,
+      loadingMore: false,
+      canLoadMore: this.props.canLoadMore
     };
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
   componentDidMount() {
-    this.fetchData()
+    this.fetchData();
   }
 
   onNavigatorEvent(event) {
@@ -39,6 +41,14 @@ export default class Detail extends Component {
         side: "left",
         animated: true
       });
+    } else if (event.type == 'DeepLink') {
+      if (event.url = "category") {
+        this.props.navigator.resetTo({
+          screen: "category.detail",
+          title: event.payload.title,
+          passProps: { url: event.payload.url, canLoadMore: event.payload.canLoadMore }
+        });
+      }
     }
   }
 
@@ -62,10 +72,17 @@ export default class Detail extends Component {
     fetch(this.props.url + "&page=" + page)
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({
-          articles: [...this.state.articles, ...responseJson.articles],
-          loadingMore: false
-        });
+        if (responseJson.articles.length <= 0) {
+          this.setState({
+            canLoadMore: false,
+            loadingMore: false
+          });
+        } else {
+          this.setState({
+            articles: [...this.state.articles, ...responseJson.articles],
+            loadingMore: false
+          });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -78,7 +95,7 @@ export default class Detail extends Component {
   }
 
   onLoadMoreData() {
-    if (this.props.canLoadMore) {
+    if (this.state.loadingMore == false && this.state.canLoadMore) {
       page = page + 1;
       this.setState({loadingMore: true})
       this.onLoadingMoreData();
@@ -86,7 +103,7 @@ export default class Detail extends Component {
   }
 
   renderFooter() {
-    if (!this.state.loadingMore) return null;
+    if (this.state.loadingMore == false) return null;
 
     return (
       <ActivityIndicator
@@ -118,6 +135,7 @@ export default class Detail extends Component {
           onRefresh={() => this.onRefresh()}
           refreshing={this.state.isFetching}
           onEndReached={() => this.onLoadMoreData()}
+          onEndReachedThreshold={0.3}
         />
       )
     }

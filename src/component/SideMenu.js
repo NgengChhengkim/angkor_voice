@@ -55,10 +55,13 @@ export default class SideMenu extends Component {
 
   sideMenuHandle(url, title, canLoadMore) {
     this._toggleDrawer();
-    this.props.navigator.resetTo({
-      screen: "category.detail",
-      title: title,
-      passProps: { url: url, canLoadMore: canLoadMore }
+    this.props.navigator.handleDeepLink({
+      link: "category",
+      payload: {
+        url: url,
+        title: title,
+        canLoadMore: canLoadMore
+      }
     });
   }
 
