@@ -43,11 +43,11 @@ export default class SideMenu extends Component {
         },
         {
           id: 4, name: "ជីវិត​ និង ស្នេហា",
-          action: () => this.sideMenuHandle(Settings.lifeAndLoveCategoryUrl + "?" + TOKEN, "ជីវិត​ និង ស្នេហា")
+          action: () => this.sideMenuHandle(Settings.lifeAndLoveCategoryUrl + "?" + TOKEN, "ជីវិត​ និង ស្នេហា", true)
         },
         {
           id: 5, name: "ប្លែកៗ",
-          action: () => this.sideMenuHandle(Settings.otherCategoryUrl + "?" + TOKEN, "ប្លែកៗ")
+          action: () => this.sideMenuHandle(Settings.otherCategoryUrl + "?" + TOKEN, "ប្លែកៗ", true)
         }
       ]
     }
