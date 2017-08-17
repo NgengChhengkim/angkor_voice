@@ -3,6 +3,7 @@ import { View, Text, SectionList, Image, ActivityIndicator } from 'react-native'
 import Article from "./article";
 import navigatorStyle from "./../shared/navigatorStyle";
 import Loading from "./../shared/loading";
+import Admob from "../shared/admob";
 
 class Home extends Component {
   static navigatorStyle = navigatorStyle;
@@ -49,18 +50,21 @@ class Home extends Component {
       )
     } else {
       return (
-        <SectionList
-          sections={this.state.categories}
-          renderSectionHeader={({section}) =>
-            <View style={styles.categoryHeader}>
-              <Text style={styles.categoryName}>{section.data[0].name}</Text>
-              <Text style={styles.seeMore}>ជាច្រើនទៀត</Text>
-            </View>
-          }
-          renderItem={
-            ({item}) => <Article navigator={this.props.navigator} articles={item.articles} />
-          }
-        />
+        <View>
+          <SectionList
+            sections={this.state.categories}
+            renderSectionHeader={({section}) =>
+              <View style={styles.categoryHeader}>
+                <Text style={styles.categoryName}>{section.data[0].name}</Text>
+                <Text style={styles.seeMore}>ជាច្រើនទៀត</Text>
+              </View>
+            }
+            renderItem={
+              ({item}) => <Article navigator={this.props.navigator} articles={item.articles} />
+            }
+          />
+          <Admob />
+        </View>
       )
     }
   }

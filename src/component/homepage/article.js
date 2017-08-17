@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
+import Admob from "../shared/admob";
 
 class Article extends Component {
 
@@ -27,6 +28,7 @@ class Article extends Component {
               <Text style={styles.title} numberOfLines={2} renderTruncatedFooter={() => <ReadMoreButton />}>{item.title}</Text>
             </TouchableOpacity>
           }/>
+          <Admob />
       </View>
     )
   }

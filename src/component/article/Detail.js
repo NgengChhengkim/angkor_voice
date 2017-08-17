@@ -8,6 +8,7 @@ import {TOKEN} from "react-native-dotenv";
 import Settings from "./../../Settings";
 
 import FBSDK from 'react-native-fbsdk';
+import Admob from "../shared/admob";
 
 const {
   ShareDialog,
@@ -99,33 +100,36 @@ export default class Detail extends Component {
       )
     } else {
       return (
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          style={styles.articleDetail}
-          data={this.state.articles}
-          keyExtractor={(item) => item.id}
-          ListHeaderComponent={() =>
-            <View>
-              <View style={styles.imageContainer}>
-                <Image style={styles.image} source={{uri: this.state.article.image_url}} />
-              </View>
+        <View>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            style={styles.articleDetail}
+            data={this.state.articles}
+            keyExtractor={(item) => item.id}
+            ListHeaderComponent={() =>
+              <View>
+                <View style={styles.imageContainer}>
+                  <Image style={styles.image} source={{uri: this.state.article.image_url}} />
+                </View>
 
-              <View style={styles.bodyContainer}>
-                <Text style={styles.title}>{this.state.article.title}</Text>
-                <Text style={styles.publishedAt}>{this.state.article.published_at}</Text>
-                <HTML html={this.state.article.content.replace(/<p>/g, "  ").replace(/<\/p>/g, "<br>")}
-                  htmlStyles={styles} renderers={renderers} />
-              </View>
+                <View style={styles.bodyContainer}>
+                  <Text style={styles.title}>{this.state.article.title}</Text>
+                  <Text style={styles.publishedAt}>{this.state.article.published_at}</Text>
+                  <HTML html={this.state.article.content.replace(/<p>/g, "  ").replace(/<\/p>/g, "<br>")}
+                    htmlStyles={styles} renderers={renderers} />
+                </View>
 
-              <View style={styles.relatedArticle}>
-                <Text style={styles.relatedText}>អត្ថបទផ្សេងទៀត</Text>
+                <View style={styles.relatedArticle}>
+                  <Text style={styles.relatedText}>អត្ថបទផ្សេងទៀត</Text>
+                </View>
               </View>
-            </View>
-          }
-          renderItem={({item}) =>
-            <ListArticle navigator={this.props.navigator} article={item} />
-          }
-        />
+            }
+            renderItem={({item}) =>
+              <ListArticle navigator={this.props.navigator} article={item} />
+            }
+          />
+          <Admob />
+        </View>
       )
     }
   }
