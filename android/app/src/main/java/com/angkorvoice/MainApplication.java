@@ -9,6 +9,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.appevents.AppEventsLogger;
+import com.sbugert.rnadmob.RNAdMobPackage;
 
 import java.util.List;
 import java.util.Arrays;
@@ -23,7 +24,8 @@ public class MainApplication extends NavigationApplication {
   @Override
   public List<ReactPackage> createAdditionalReactPackages() {
     return Arrays.<ReactPackage>asList(
-      new FBSDKPackage(mCallbackManager)
+      new FBSDKPackage(mCallbackManager),
+      new RNAdMobPackage()
     );
   }
 

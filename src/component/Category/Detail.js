@@ -4,6 +4,7 @@ import navigatorStyle from "./../shared/navigatorStyle";
 import Loading from "./../shared/loading";
 import TopArticle from "./../shared/TopArticle";
 import ListArticle from "./../shared/ListArticle";
+import Admob from "../shared/admob";
 
 let page = 1;
 
@@ -120,23 +121,26 @@ export default class Detail extends Component {
       )
     } else {
       return (
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          style={styles.container}
-          data={this.state.articles}
-          keyExtractor={(item) => item.id}
-          ListHeaderComponent={() =>
-            <TopArticle article={this.state.top_article} navigator={this.props.navigator} />
-          }
-          renderItem={({item}) =>
-            <ListArticle navigator={this.props.navigator} article={item} />
-          }
-          ListFooterComponent={() => this.renderFooter()}
-          onRefresh={() => this.onRefresh()}
-          refreshing={this.state.isFetching}
-          onEndReached={() => this.onLoadMoreData()}
-          onEndReachedThreshold={0.3}
-        />
+        <View>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            style={styles.container}
+            data={this.state.articles}
+            keyExtractor={(item) => item.id}
+            ListHeaderComponent={() =>
+              <TopArticle article={this.state.top_article} navigator={this.props.navigator} />
+            }
+            renderItem={({item}) =>
+              <ListArticle navigator={this.props.navigator} article={item} />
+            }
+            ListFooterComponent={() => this.renderFooter()}
+            onRefresh={() => this.onRefresh()}
+            refreshing={this.state.isFetching}
+            onEndReached={() => this.onLoadMoreData()}
+            onEndReachedThreshold={0.3}
+          />
+          <Admob />
+        </View>
       )
     }
   }
