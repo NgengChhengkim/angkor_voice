@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { View, Image, Text, TouchableOpacity } from "react-native";
+import { View, Image, Text, TouchableOpacity, Dimensions } from "react-native";
 
 export default class TopArticle extends Component {
   constructor(props) {
@@ -32,6 +32,8 @@ export default class TopArticle extends Component {
   }
 }
 
+const windowWidth = Dimensions.get('window').width;
+
 const styles = {
   container: {
     flex: 1
@@ -60,7 +62,7 @@ const styles = {
   },
 
   image: {
-    height: 200,
+    height: windowWidth * 0.5,
     justifyContent: "flex-end"
   }
 }

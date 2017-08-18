@@ -135,7 +135,7 @@ export default class Detail extends Component {
   }
 }
 
-const windowWidth = Dimensions.get('window').width * PixelRatio.get()
+const windowWidth = Dimensions.get('window').width;
 
 const styles = {
   bodyContainer: {
@@ -161,7 +161,7 @@ const styles = {
 
   imageContainer: {
     flex: 1,
-    height: 200,
+    height: windowWidth * 0.5,
     flexDirection: "row"
   },
 
