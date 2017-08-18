@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { View, FlatList, TouchableOpacity, Text, Image } from "react-native";
+import { View, FlatList, TouchableOpacity, Text, Image, Dimensions } from "react-native";
 
 export default class ListArticle extends Component {
   constructor (props) {
@@ -25,6 +25,8 @@ export default class ListArticle extends Component {
   }
 }
 
+const windowWidth = Dimensions.get('window').width;
+
 const styles= {
   article: {
     flex: 1,
@@ -41,7 +43,7 @@ const styles= {
 
   articleImage: {
     flex: 0.4,
-    height: 100
+    height: windowWidth * 0.25
   },
 
   articleTitle: {
