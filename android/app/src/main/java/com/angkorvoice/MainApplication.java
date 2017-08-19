@@ -11,6 +11,8 @@ import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.appevents.AppEventsLogger;
 import com.sbugert.rnadmob.RNAdMobPackage;
 
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
+
 import java.util.List;
 import java.util.Arrays;
 
@@ -25,7 +27,9 @@ public class MainApplication extends NavigationApplication {
   public List<ReactPackage> createAdditionalReactPackages() {
     return Arrays.<ReactPackage>asList(
       new FBSDKPackage(mCallbackManager),
-      new RNAdMobPackage()
+      new RNAdMobPackage(),
+      new ReactNativeOneSignalPackage()
+
     );
   }
 
