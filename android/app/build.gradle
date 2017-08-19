@@ -102,6 +102,11 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        dexOptions {
+            jumboMode true
+        }
+        manifestPlaceholders = [onesignal_app_id: "266ac805-f16e-43ba-8ab2-3c341f2634dc",
+                                onesignal_google_project_number: "1023889584869"]
     }
     splits {
         abi {
@@ -133,6 +138,10 @@ android {
 }
 
 dependencies {
+    compile "com.google.android.gms:play-services-base:+"
+    compile "com.google.android.gms:play-services-location:+"
+    compile "com.google.android.gms:play-services-ads:+"
+    compile project(':react-native-onesignal')
     compile project(':react-native-fbsdk')
     compile project(':react-native-admob')
   compile project(':react-native-fbsdk')
