@@ -13,7 +13,8 @@
     "react-native-admob": "^1.3.0",
     "react-native-fbsdk": "^0.6.1",
     "react-native-fence-html": "^1.0.6",
-    "react-native-navigation": "^1.1.108"
+    "react-native-navigation": "^1.1.108",
+    "react-native-onesignal": "^3.0.5"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",

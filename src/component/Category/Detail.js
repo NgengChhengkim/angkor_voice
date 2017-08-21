@@ -5,6 +5,7 @@ import Loading from "./../shared/loading";
 import TopArticle from "./../shared/TopArticle";
 import ListArticle from "./../shared/ListArticle";
 import Admob from "../shared/admob";
+import OneSignal from 'react-native-onesignal';
 
 let page = 1;
 
@@ -34,20 +35,48 @@ export default class Detail extends Component {
 
   componentDidMount() {
     this.fetchData();
+    OneSignal.configure({});
+    OneSignal.inFocusDisplaying(2);
+  }
+
+  componentWillMount() {
+    OneSignal.addEventListener('opened', this.onOpened.bind(this));
+  }
+
+  componentWillUnmount() {
+    OneSignal.removeEventListener('opened', this.onOpened);
+  }
+
+  onOpened(openResult) {
+    this.props.navigator.handleDeepLink({
+      link: "article",
+      payload: {
+        id: openResult.notification.payload.additionalData.id
+      }
+    });
   }
 
   onNavigatorEvent(event) {
-    if (event.id === "toogleDrawer") {
+    if (event.id == "toogleDrawer") {
       this.props.navigator.toggleDrawer({
         side: "left",
         animated: true
       });
-    } else if (event.type == 'DeepLink') {
-      if (event.url = "category") {
+    }
+    if (event.type == 'DeepLink') {
+      if (event.link == "category") {
         this.props.navigator.resetTo({
           screen: "category.detail",
           title: event.payload.title,
           passProps: { url: event.payload.url, canLoadMore: event.payload.canLoadMore }
+        });
+      } else if (event.link == "article") {
+        this.props.navigator.push({
+          screen: "article.detail",
+          title: "ANGKORVOICE",
+          backButtonTitle: "",
+          passProps:
+            { id: event.payload.id }
         });
       }
     }

@@ -12,6 +12,8 @@
 #import <React/RCTRootView.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 @implementation AppDelegate
+@synthesize oneSignal = _oneSignal;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -27,6 +29,9 @@
   // **********************************************
   // *** DON'T MISS: THIS IS HOW WE BOOTSTRAP *****
   // **********************************************
+  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
+    appId:@"266ac805-f16e-43ba-8ab2-3c341f2634dc"
+    settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNotification), kOSSettingsKeyAutoPrompt : @YES}];
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   self.window.backgroundColor = [UIColor whiteColor];
   [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation launchOptions:launchOptions];
@@ -61,6 +66,10 @@
   ];
   // Add any custom logic here.
   return handled;
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
+  [RCTOneSignal didReceiveRemoteNotification:notification];
 }
 
 @end
