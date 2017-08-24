@@ -37,9 +37,6 @@ export default class Detail extends Component {
     this.fetchData();
     OneSignal.configure({});
     OneSignal.inFocusDisplaying(2);
-  }
-
-  componentWillMount() {
     OneSignal.addEventListener('opened', this.onOpened.bind(this));
   }
 

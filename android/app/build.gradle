@@ -138,9 +138,6 @@ android {
 }
 
 dependencies {
-    compile "com.google.android.gms:play-services-base:+"
-    compile "com.google.android.gms:play-services-location:+"
-    compile "com.google.android.gms:play-services-ads:+"
     compile project(':react-native-onesignal')
     compile project(':react-native-fbsdk')
     compile project(':react-native-admob')
