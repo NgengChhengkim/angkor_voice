@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Image, ScrollView, Dimensions, PixelRatio, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, Image, ScrollView, Dimensions, PixelRatio, TouchableOpacity, FlatList, NetInfo } from "react-native";
 import HTML from "react-native-fence-html";
 import navigatorStyle from "./../shared/navigatorStyle";
 import Loading from "./../shared/loading";
@@ -9,6 +9,7 @@ import Settings from "./../../Settings";
 
 import FBSDK from 'react-native-fbsdk';
 import Admob from "../shared/admob";
+import NoConnection from "../shared/NoConnection";
 
 const {
   ShareDialog,
@@ -37,6 +38,24 @@ export default class Detail extends Component {
   }
 
   componentDidMount() {
+    NetInfo.addEventListener('change', this._handleConnectionInfoChange.bind(this));
+    NetInfo.fetch().done((connectionInfo) => {this.checkConnection(connectionInfo)});
+  }
+
+  componentDidUnMount() {
+    NetInfo.removeEventListener('change', this._handleConnectionInfoChange.bind(this));
+  }
+
+   _handleConnectionInfoChange(connectionInfo) {
+    this.checkConnection(connectionInfo)
+  }
+
+  checkConnection(connectionInfo) {
+    this.setState({connecting: (connectionInfo == "NONE" ? false : true)});
+    if(this.state.connecting) {this.fetchData()}
+  }
+
+  fetchData() {
     fetch(Settings.articleUrl + this.props.id + "?" + TOKEN)
       .then((response) => response.json())
       .then((responseJson) => {
@@ -94,7 +113,11 @@ export default class Detail extends Component {
       }
     }
 
-    if (this.state.loading) {
+    if (this.state.connecting == false) {
+      return (
+        <NoConnection />
+      )
+    }else if (this.state.loading) {
       return (
         <Loading />
       )
