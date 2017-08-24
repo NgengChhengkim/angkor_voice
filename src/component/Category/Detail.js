@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, Image, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Text, Image, FlatList, TouchableOpacity, ActivityIndicator, NetInfo } from "react-native";
 import navigatorStyle from "./../shared/navigatorStyle";
 import Loading from "./../shared/loading";
 import TopArticle from "./../shared/TopArticle";
 import ListArticle from "./../shared/ListArticle";
 import Admob from "../shared/admob";
 import OneSignal from 'react-native-onesignal';
+import NoConnection from "../shared/NoConnection";
 
 let page = 1;
 
@@ -34,7 +35,8 @@ export default class Detail extends Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+    NetInfo.addEventListener('change', this._handleConnectionInfoChange.bind(this));
+    NetInfo.fetch().done((connectionInfo) => {this.checkConnection(connectionInfo)});
     OneSignal.configure({});
     OneSignal.inFocusDisplaying(2);
     OneSignal.addEventListener('opened', this.onOpened.bind(this));
@@ -42,6 +44,16 @@ export default class Detail extends Component {
 
   componentWillUnmount() {
     OneSignal.removeEventListener('opened', this.onOpened);
+    NetInfo.removeEventListener('change', this._handleConnectionInfoChange.bind(this));
+  }
+
+  _handleConnectionInfoChange(connectionInfo) {
+    this.checkConnection(connectionInfo);
+  }
+
+  checkConnection(connectionInfo) {
+    this.setState({connecting: (connectionInfo == "NONE" ? false : true)});
+    if(this.state.connecting) {this.fetchData()}
   }
 
   onOpened(openResult) {
@@ -141,7 +153,11 @@ export default class Detail extends Component {
   };
 
   render () {
-    if (this.state.loading) {
+    if (this.state.connecting == false) {
+      return (
+        <NoConnection />
+      )
+    }else if (this.state.loading) {
       return (
         <Loading />
       )
