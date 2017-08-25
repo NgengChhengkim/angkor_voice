@@ -52,7 +52,7 @@ export default class Detail extends Component {
   }
 
   checkConnection(connectionInfo) {
-    this.setState({connecting: (connectionInfo == "NONE" ? false : true)});
+    this.setState({connecting: (connectionInfo.toLowerCase() == "none" ? false : true)});
     if(this.state.connecting) {this.fetchData()}
   }
 
