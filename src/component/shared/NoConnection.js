@@ -5,7 +5,7 @@ export default class NoConnection extends Component {
   render () {
     return (
       <View style={styles.wraper}>
-        <Text style={styles.text}>No Internet Connection</Text>
+        <Text style={styles.text}>គ្មានអ៊ីនធឺណិត</Text>
       </View>
     )
   }
