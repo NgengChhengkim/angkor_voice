@@ -51,7 +51,7 @@ export default class Detail extends Component {
   }
 
   checkConnection(connectionInfo) {
-    this.setState({connecting: (connectionInfo.toLowerCase() == "none")});
+    this.setState({connecting: (connectionInfo.toLowerCase() == "none" ? false : true)});
     if(this.state.connecting) {this.fetchData()}
   }
 
