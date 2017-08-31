@@ -13,7 +13,7 @@ export default class Admob extends Component {
       <View style={styles.containerStyle}>
         <AdMobBanner
         bannerSize="smartBannerPortrait"
-        adUnitID="ca-app-pub-1800326461459225/3460006796"
+        adUnitID="ca-app-pub-1800326461459225/3054883199"
         testDeviceID=""
         didFailToReceiveAdWithError={this.bannerError} />
       </View>
